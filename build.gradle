@@ -1,0 +1,66 @@
+plugins {
+    id 'java-library'
+    id 'io.qameta.allure' version '3.0.2'
+    id 'io.freefair.lombok' version "9.2.0"
+
+}
+
+group = 'com.gmail.klevtsovamariya'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+def restAssuredVersion = "6.0.0",
+    selenideVersion = "7.13.0",
+    allureVersion = "2.34.0",
+    junitVersion = "5.14.3",
+    slf4jVersion = "2.0.17",
+    jacksonDatabindVersion = "3.1.0",
+    datafakerVersion = "2.5.4",
+    assertjVersion = "3.27.7",
+    platformSuite = "6.0.3"
+
+allure {
+    report {
+        version.set(allureVersion)
+    }
+    adapter {
+        allureJavaVersion = allureVersion
+        aspectjWeaver = true
+        frameworks {
+            junit5 {
+                enabled = true
+            }
+        }
+    }
+}
+
+dependencies {
+    testImplementation(
+            "com.codeborne:selenide:$selenideVersion",
+            "io.qameta.allure:allure-selenide:$allureVersion",
+            "io.rest-assured:rest-assured:$restAssuredVersion",
+            "io.rest-assured:json-schema-validator:$restAssuredVersion",
+            "io.qameta.allure:allure-rest-assured:$allureVersion",
+            "tools.jackson.core:jackson-databind:$jacksonDatabindVersion",
+            "net.datafaker:datafaker:$datafakerVersion",
+            "org.assertj:assertj-core:$assertjVersion",
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            "org.slf4j:slf4j-simple:$slf4jVersion",
+            "org.junit.platform:junit-platform-suite:$platformSuite",
+    )
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
