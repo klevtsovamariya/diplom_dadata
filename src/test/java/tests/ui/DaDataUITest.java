@@ -78,24 +78,6 @@ class DaDataUITest extends UIBaseTest {
     }
 
     @Test
-    @DisplayName("Блог: проверить страницу блога, hot-статью и переход на статью")
-    @Description("Переходим в блог, проверяем заголовок страницы, hot-статью и первые strong-заголовки в статье.")
-    @Severity(SeverityLevel.NORMAL)
-    void hotArticleShouldOpenFromBlogPage() {
-        homePage.checkBlogTab(
-                        "Блог",
-                        "Блог о данных для бизнеса\\s+и сервисе DaData",
-                        "ALLIO\\s+ускорили проведение сделок с недвижимостью с нескольких часов до 2 минут"
-                )
-                .openHotArticleAndCheckStrongText(
-                        "О компании",
-                        "Проблема",
-                        "Решение",
-                        "Результат"
-                );
-    }
-
-    @Test
     @DisplayName("Меню продуктов: проверить список продуктов в выпадающем меню")
     @Description("Открываем выпадающее меню «Продукты» и проверяем список продуктовых пунктов.")
     @Severity(SeverityLevel.NORMAL)

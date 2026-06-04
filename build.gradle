@@ -64,3 +64,17 @@ tasks.withType(Test) {
         }
     }
 }
+
+tasks.register('uiTests', Test) {
+    useJUnitPlatform {
+        includeTags 'ui'
+    }
+    systemProperties(System.getProperties())
+}
+
+tasks.register('apiTests', Test) {
+    useJUnitPlatform {
+        includeTags 'api'
+    }
+    systemProperties(System.getProperties())
+}

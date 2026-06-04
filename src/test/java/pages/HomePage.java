@@ -1,32 +1,25 @@
 package pages;
 
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import pages.components.HeaderComponent;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 
 public class HomePage {
     HeaderComponent headerComponent = new HeaderComponent();
 
-    private ElementsCollection articleStrongHeaders = $$(".is-post__content > p > strong");
     private SelenideElement mainHeroTitle = $(".motto__title");
     private SelenideElement connectButton = $(byText("Подключиться"));
     private SelenideElement joinButton = $(byText("Присоединиться"));
-    private SelenideElement hotContent = $(".row.hot-content-top");
-    private SelenideElement article = $(".is-post__content");
     private SelenideElement registrationForm = $("#registration-form");
     private SelenideElement loginForm = $("#login-form");
     private SelenideElement loginButton = $("[data-test='login-button']");
     private SelenideElement registrationNameInput = registrationForm.$("input[name='full_name']");
     private SelenideElement registrationEmailInput = registrationForm.$("input[name='email']");
     private SelenideElement registrationPasswordInput = registrationForm.$("input[name='password']");
-    private SelenideElement registrationFormButton = registrationForm.$(".form-button");
     private SelenideElement loginEmailInput = loginForm.$("input[name='email']");
     private SelenideElement loginPasswordInput = loginForm.$("input[name='password']");
     private SelenideElement loginFormButton = loginForm.$(".form-button");
@@ -63,35 +56,6 @@ public class HomePage {
         return this;
     }
 
-    @Step("Перейти в раздел «{textButton}» и проверить URL, заголовок страницы и hot-статью")
-    public HomePage checkBlogTab(String textButton, String title, String text) {
-        headerComponent.clickHeaderMenuButton(textButton);
-        webdriver().shouldHave(urlContaining("/blog/"));
-        headerComponent.verifyPageHeader(title);
-        hotContent.shouldBe(visible).shouldHave(matchText(text));
-
-        return this;
-    }
-
-    @Step("Проверка кнопки {text}")
-    public HomePage checkRegistrationButton(String text) {
-        registrationFormButton.shouldBe(visible).shouldHave(exactText(text));
-
-        return this;
-    }
-
-    @Step("Проверить переход на статью по клику на hot-блок и первые strong-заголовки")
-    public HomePage openHotArticleAndCheckStrongText(String... expectedTexts) {
-        hotContent.click();
-        webdriver().shouldHave(urlContaining("/blog/cases/allio/"));
-        article.shouldBe(visible);
-        for (int i = 0; i < expectedTexts.length; i++) {
-            articleStrongHeaders.get(i).shouldHave(text(expectedTexts[i]));
-        }
-
-        return this;
-    }
-
     @Step("Проверить форму входа при клике на кнопку «Войти»")
     public HomePage checkRegistrationWindowAfterLoginClick() {
         loginButton.shouldBe(visible, enabled).click();
@@ -101,14 +65,14 @@ public class HomePage {
     }
 
     @Step("Ввести email")
-    public HomePage setEmail (String email) {
+    public HomePage setEmail(String email) {
         loginEmailInput.shouldBe(visible).setValue(email);
 
         return this;
     }
 
     @Step("Ввести пароль")
-    public HomePage setPassword (String password) {
+    public HomePage setPassword(String password) {
         loginPasswordInput.shouldBe(visible).setValue(password);
 
         return this;

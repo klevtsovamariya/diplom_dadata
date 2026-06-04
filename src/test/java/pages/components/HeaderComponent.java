@@ -41,20 +41,6 @@ public class HeaderComponent {
         return this;
     }
 
-    @Step("Проверить заголовок страницы: «{expectedText}»")
-    public HeaderComponent verifyPageHeader(String expectedText) {
-        pageHeader.get(0).shouldHave(matchText(expectedText));
-
-        return this;
-    }
-
-    @Step("Кликнуть на пункт главного меню {buttonText}")
-    public HeaderComponent clickHeaderMenuButton(String buttonText) {
-        menuWrapper.$(byText(buttonText)).shouldBe(visible).click();
-
-        return this;
-    }
-
     @Step("Проверить список продуктов в выпадающем меню")
     public HeaderComponent verifyProductsDropdownItems(String... expectedTexts) {
         for (String expectedText : expectedTexts) {

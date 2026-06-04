@@ -1,5 +1,4 @@
 .gradle
-gradle/
 build/
 allure-results/
 allure-report/
@@ -36,5 +35,3 @@ bin/
 
 ### VS Code ###
 .vscode/
-gradlew
-gradlew.bat

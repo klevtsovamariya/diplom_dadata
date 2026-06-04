@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "required": [
+      "source"
+    ],
+    "properties": {
+      "source": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "result": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "phone": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "email": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "local": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "domain": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "surname": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "patronymic": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "qc": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      }
+    },
+    "additionalProperties": true
+  }
+}
