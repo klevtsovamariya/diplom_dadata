@@ -20,7 +20,8 @@ def restAssuredVersion = "6.0.0",
     jacksonDatabindVersion = "3.1.0",
     datafakerVersion = "2.5.4",
     assertjVersion = "3.27.7",
-    platformSuite = "6.0.3"
+    platformSuite = "6.0.3",
+    ownerVersion = "1.0.12"
 
 allure {
     report {
@@ -50,12 +51,23 @@ dependencies {
             "org.junit.jupiter:junit-jupiter:$junitVersion",
             "org.slf4j:slf4j-simple:$slf4jVersion",
             "org.junit.platform:junit-platform-suite:$platformSuite",
+            "org.aeonbits.owner:owner:$ownerVersion",
     )
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+test {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 tasks.withType(Test) {
     useJUnitPlatform()
-    systemProperties(System.getProperties())
+    jvmArgs '-Dfile.encoding=UTF-8', '-Dstdout.encoding=UTF-8', '-Dstderr.encoding=UTF-8'
 
     testLogging {
         lifecycle {
@@ -63,18 +75,4 @@ tasks.withType(Test) {
             exceptionFormat "short"
         }
     }
-}
-
-tasks.register('uiTests', Test) {
-    useJUnitPlatform {
-        includeTags 'ui'
-    }
-    systemProperties(System.getProperties())
-}
-
-tasks.register('apiTests', Test) {
-    useJUnitPlatform {
-        includeTags 'api'
-    }
-    systemProperties(System.getProperties())
 }

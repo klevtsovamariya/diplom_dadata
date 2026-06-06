@@ -1,169 +1,181 @@
-# Проект по автоматизации тестирования DaData
+# Проект по автоматизации тестирования сервиса [DaData](https://dadata.ru/)
 
-Учебный дипломный проект с UI- и API-автотестами для сервиса [DaData](https://dadata.ru/).
+<!-- здесь будет баннер проекта -->
+<!-- <p align="center">
+<img src="images/logos/dadata_banner.png" alt="DaData" width="950"/>
+</p> -->
 
-Проект демонстрирует автоматизацию проверок публичного сайта DaData и реальных API-методов DaData Cleaner API и Suggestions API. API-тесты используют REST Assured, модели request/response, переиспользуемые specifications, JSON Schema validation и кастомные шаблоны Allure REST Assured listener.
+# 📝 Содержание:
 
-## Содержание
-
-- [Технологии и инструменты](#технологии-и-инструменты)
-- [Что проверяется](#что-проверяется)
-- [Покрытие требований диплома](#покрытие-требований-диплома)
+- [Стек](#стек)
+- [Реализованные проверки](#реализованные-проверки)
 - [Структура проекта](#структура-проекта)
-- [Запуск тестов](#запуск-тестов)
-- [Параметры запуска](#параметры-запуска)
-- [Allure отчет](#allure-отчет)
-- [Ручные тест-кейсы](#ручные-тест-кейсы)
-- [GitHub](#github)
+- [Запуск тестов из терминала](#запуск-тестов-из-терминала)
+- [Allure Report](#allure-report)
+- [Уведомление в Telegram](#уведомление-в-telegram)
 
-## Технологии и инструменты
+<a id="стек"></a>
 
-| Инструмент | Назначение |
-| --- | --- |
-| Java | язык автотестов |
-| Gradle | сборка и запуск тестов |
-| JUnit 5 | тестовый фреймворк |
-| Selenide | UI-автоматизация |
-| REST Assured | API-автоматизация |
-| Allure Report | отчетность |
-| Allure REST Assured | вложения request/response в отчет |
-| Lombok | подключен для моделей и сокращения шаблонного кода |
-| AssertJ | fluent assertions |
-| JSON Schema Validator | проверка контрактов API |
-| DataFaker | генерация тестовых данных |
+## ☕ Стек:
 
-Модели request/response реализованы через Java `record`: это компактный immutable-формат DTO. Lombok подключен в проекте и доступен для расширения моделей, но для текущих DTO `record` закрывает ту же задачу без boilerplate-кода.
+![Java](images/logos/Java.png)![Gradle](images/logos/Gradle.png)![Rest-Assured](images/logos/Rest-Assured.png)![Selenide](images/logos/Selenide.png)![Intelij_IDEA](images/logos/Intelij_IDEA.png)![JUnit5](images/logos/JUnit5.png)![Jenkins](images/logos/Jenkins.png)![Selenoid](images/logos/Selenoid.png)![Allure_Report](images/logos/Allure_Report.png)![AllureTestOps](images/logos/AllureTestOps.png)
 
-## Что проверяется
+В проекте автотесты написаны на **Java**. Сборка — **Gradle**, тесты — **JUnit 5**.
+
+Для UI используется **Selenide**, для API — **Rest Assured**. Отчёты формируются в **Allure Report**. Проверки в тестах — через **AssertJ**, тестовые данные генерируются **DataFaker**.
+
+<a id="реализованные-проверки"></a>
+
+## 📠 Реализованные проверки:
 
 ### UI-тесты
 
-- Главная страница отображает основной заголовок и CTA-кнопки.
-- Хедер содержит основные пункты меню и иконку поддержки.
-- Кнопка `Войти` открывает форму авторизации.
-- Кнопка `Подключиться` открывает форму регистрации.
-- Кнопка `Присоединиться` открывает форму регистрации.
-- Меню `Продукты` содержит основные продукты DaData.
+### Главная страница и кнопки на ней
 
-### API-тесты
+### Меню в шапке сайта
 
-- `POST /api/v1/clean/NAME` нормализует ФИО.
-- `POST /api/v1/clean/NAME` без авторизационных заголовков возвращает ошибку авторизации.
-- `POST /api/v1/clean/PHONE` приводит телефон к международному формату.
-- `POST /api/v1/clean` возвращает структурированную запись с очищенным ФИО.
-- `POST /api/4_1/rs/suggest/address` возвращает релевантные подсказки адресов.
-- `POST /api/4_1/rs/suggest/email` возвращает варианты email по неполному адресу.
+### Форма входа и регистрации
 
-## Покрытие требований диплома
+### Меню «Продукты»
 
-| Требование | Где реализовано |
-| --- | --- |
-| API-проект с README | `README.md` |
-| Модели для body POST-запросов | `src/test/java/models/cleaner/RecordBodyModel.java`, `src/test/java/models/suggestions/SuggestRequestModel.java` |
-| Модели для десериализации ответа | `src/test/java/models/cleaner`, `src/test/java/models/suggestions` |
-| REST Assured specifications | `src/test/java/specs` |
-| Allure REST Assured listener | `src/test/java/allure/CustomAllureListener.java` |
-| Custom templates для Allure | `src/test/resources/tpl/request.ftl`, `src/test/resources/tpl/response.ftl` |
-| Авторизация API | API-клиенты передают `Authorization` и `X-Secret` из системных параметров |
-| API-тесты | `src/test/java/tests/api` |
-| UI-тесты | `src/test/java/tests/ui` |
-| Ручные тесты | `src/test/manual-test-cases.md` |
+### API-тесты (Cleaner)
 
-## Структура проекта
+### Очистка ФИО
+
+### Очистка телефона
+
+### Запись с ФИО
+
+### Запрос без авторизации
+
+### API-тесты (Suggestions)
+
+### Подсказки по адресу
+
+### Подсказки по email
+
+### Ручные тест-кейсы
+
+Описание ручных проверок — в файле [manual-test-cases.md](src/test/manual-test-cases.md).
+
+<a id="структура-проекта"></a>
+
+## 📁 Структура проекта
 
 ```text
 src/test/java
-├── allure       # Allure attachments и REST Assured listener
-├── api          # API-клиенты DaData
-├── models       # request/response модели
-├── pages        # page objects и компоненты UI
-├── specs        # REST Assured specifications
+├── allure       # вложения и listener для Allure
+├── api          # клиенты к API DaData
+├── config       # настройки (ключи, url)
+├── models       # модели запросов и ответов
+├── pages        # page object'ы для UI
+├── specs        # общие настройки REST Assured
 └── tests
     ├── api      # API-тесты
     └── ui       # UI-тесты
 
 src/test/resources
-├── schemas      # JSON-схемы ответов API
-└── tpl          # custom templates для Allure REST Assured
+├── schemas      # json-схемы ответов API
+├── tpl          # шаблоны request/response в Allure
+└── application.properties
 ```
 
-## Запуск тестов
+<a id="запуск-тестов-из-терминала"></a>
 
-Запуск всех тестов:
+## 💻 Запуск тестов из терминала
 
-```bash
-./gradlew test
+Команды для Windows, запускать из корня проекта.
+
+Все тесты:
+
+```
+gradlew.bat test
 ```
 
-Запуск только UI-тестов:
+Только UI:
 
-```bash
-./gradlew uiTests
+```
+gradlew.bat test --tests "tests.ui.*"
 ```
 
-Запуск только API-тестов:
+Только API:
 
-```bash
-./gradlew apiTests -Ddadata.api.token=TOKEN -Ddadata.api.secret=SECRET
+```
+gradlew.bat test --tests "tests.api.*"
 ```
 
-API-тесты используют реальные вызовы к DaData. Если обязательные параметры не переданы, тесты пропускаются через JUnit assumptions:
+<!-- здесь будет скрин успешного запуска тестов из терминала -->
+<!-- <p align="center">
+<img src="images/screenshots/terminal_test_run.jpg" alt="Запуск тестов" width="850"/>
+</p> -->
 
-- Cleaner API требует `dadata.api.token` и `dadata.api.secret`.
-- Suggestions API требует `dadata.api.token`.
+Для API-тестов нужны ключи DaData. Они лежат в файле `dadata-secret.properties` в домашней папке:
 
-## Параметры запуска
-
-### UI
-
-Локальный запуск:
-
-```bash
-./gradlew uiTests -Dbrowser=chrome -DbrowserSize=1920x1080 -Dheadless=true
+```
+dadata.api.token=...
+dadata.api.secret=...
 ```
 
-Удаленный запуск через Selenoid:
+Если ключей нет — api-тесты не запускаются.
 
-```bash
-./gradlew uiTests \
-  -DloginSelenoid=LOGIN \
-  -DpasswordSelenoid=PASSWORD \
-  -DurlSelenoid=HOST/wd/hub
+<a id="allure-report"></a>
+
+## 📊 Allure Report
+
+Собрать отчёт:
+
+```
+gradlew.bat allureReport
 ```
 
-### API
+Открыть в браузере:
 
-```bash
-./gradlew apiTests \
-  -Ddadata.api.token=TOKEN \
-  -Ddadata.api.secret=SECRET
+```
+gradlew.bat allureServe
 ```
 
-## Allure отчет
+### Основная страница отчёта
 
-Сформировать отчет:
+<!-- здесь будет скрин из Allure: главная -->
+<!-- <p align="center">
+<img src="images/screenshots/allure_main.jpg" alt="Allure Overview" width="850"/>
+</p> -->
 
-```bash
-./gradlew allureReport
-```
+### Тест-кейсы
 
-Открыть отчет:
+<!-- здесь будет скрин из Allure: список тестов -->
+<!-- <p align="center">
+<img src="images/screenshots/allure_tests.jpg" alt="Allure Tests" width="850"/>
+</p> -->
 
-```bash
-./gradlew allureServe
-```
+### Графики
 
-В Allure-отчет добавляются:
+<!-- здесь будет скрин из Allure: графики -->
+<!-- <p align="center">
+<img src="images/screenshots/allure_graph.jpg" alt="Allure Graphs" width="850"/>
+</p> -->
 
-- названия и описания тестов;
-- severity;
-- шаги проверок;
-- HTTP request/response для API-тестов через кастомные шаблоны;
-- UI attachments при падениях тестов.
+### Пример API-теста в отчёте
 
-## Ручные тест-кейсы
+<!-- здесь будет скрин из Allure: request/response -->
+<!-- <p align="center">
+<img src="images/screenshots/allure_api_request.jpg" alt="Allure API" width="850"/>
+</p> -->
 
-Ручные тест-кейсы вынесены в отдельный файл: [src/test/manual-test-cases.md](src/test/manual-test-cases.md).
+### Пример UI-теста в отчёте
 
-В документе описаны UI- и API-проверки с предусловиями, шагами и ожидаемыми результатами.
+<!-- здесь будет скрин из Allure: шаги UI-теста или скриншот при падении -->
+<!-- <p align="center">
+<img src="images/screenshots/allure_ui_test.jpg" alt="Allure UI" width="850"/>
+</p> -->
 
+<a id="уведомление-в-telegram"></a>
+
+## <img alt="Telegram" height="25" src="images/logos/Telegram.png" width="25"/> Уведомление в Telegram
+
+После прогона тестов в Jenkins в Telegram приходит сообщение с результатом сборки.
+
+<!-- здесь будет скрин уведомления в Telegram -->
+<!-- <p align="center">
+<img src="images/screenshots/telegram_notification.jpg" alt="Telegram" width="850"/>
+</p> -->

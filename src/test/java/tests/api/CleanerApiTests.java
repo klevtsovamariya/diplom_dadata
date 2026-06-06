@@ -55,9 +55,7 @@ class CleanerApiTests extends TestBase {
     void cleanNameWithoutAuthorizationShouldBeRejectedTest() {
         String source = "иванов иван иванович";
 
-        step("Отправить запрос без авторизационных заголовков", () ->
-                api.cleaner.cleanNameWithoutAuthorization(source)
-        );
+        api.cleaner.cleanNameWithoutAuthorization(source);
     }
 
     @Test

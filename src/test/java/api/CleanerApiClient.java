@@ -1,5 +1,6 @@
 package api;
 
+import config.ApiConfig;
 import io.qameta.allure.Step;
 import models.cleaner.AsIsCleanResponseModel;
 import models.cleaner.EmailCleanResponseModel;
@@ -7,12 +8,12 @@ import models.cleaner.NameCleanResponseModel;
 import models.cleaner.NameRecordResponseModel;
 import models.cleaner.PhoneCleanResponseModel;
 import models.cleaner.RecordBodyModel;
-import tests.api.TestConfig;
 
 import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static org.aeonbits.owner.ConfigFactory.create;
 import static specs.cleaner.CleanerSpec.cleanerRequestSpec;
 import static specs.cleaner.CleanerSpec.successfulCleanArrayResponseSpec;
 import static specs.cleaner.CleanerSpec.successfulCleanRecordResponseSpec;
@@ -22,6 +23,7 @@ public class CleanerApiClient {
 
     private static final String CLEAN_SIMPLE_ENDPOINT = "/api/v1/clean/{type}";
     private static final String CLEAN_RECORD_ENDPOINT = "/api/v1/clean";
+    private static final ApiConfig config = create(ApiConfig.class, System.getProperties());
 
     @Step("Отправить ФИО на очистку")
     public NameCleanResponseModel cleanName(String source) {
@@ -100,8 +102,8 @@ public class CleanerApiClient {
 
     private Map<String, String> authHeaders() {
         return Map.of(
-                "Authorization", "Token " + TestConfig.dadataApiToken(),
-                "X-Secret", TestConfig.dadataApiSecret()
+                "Authorization", "Token " + config.dadataApiToken(),
+                "X-Secret", config.dadataApiSecret()
         );
     }
 }

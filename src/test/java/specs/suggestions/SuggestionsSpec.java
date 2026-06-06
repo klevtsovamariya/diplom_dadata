@@ -1,22 +1,25 @@
 package specs.suggestions;
 
+import config.ApiConfig;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import tests.api.TestConfig;
 
 import static io.restassured.filter.log.LogDetail.ALL;
 import static io.restassured.http.ContentType.JSON;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.aeonbits.owner.ConfigFactory.create;
 import static specs.BaseSpec.baseRequestSpec;
 
 public class SuggestionsSpec {
 
+    private static final ApiConfig config = create(ApiConfig.class, System.getProperties());
+
     public static RequestSpecification suggestionsRequestSpec = new RequestSpecBuilder()
             .addRequestSpecification(baseRequestSpec)
-            .setBaseUri(TestConfig.suggestionsBaseUrl())
+            .setBaseUri(config.suggestionsBaseUrl())
             .build();
 
     public static ResponseSpecification successfulSuggestResponseSpec = new ResponseSpecBuilder()
