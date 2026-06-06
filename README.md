@@ -136,38 +136,33 @@ gradlew.bat allureServe
 
 ### Основная страница отчёта
 
-<!-- здесь будет скрин из Allure: главная -->
-<!-- <p align="center">
+<p align="center">
 <img src="images/screenshots/allure_main.jpg" alt="Allure Overview" width="850"/>
-</p> -->
+</p>
 
 ### Тест-кейсы
 
-<!-- здесь будет скрин из Allure: список тестов -->
-<!-- <p align="center">
+<p align="center">
 <img src="images/screenshots/allure_tests.jpg" alt="Allure Tests" width="850"/>
-</p> -->
+</p>
 
 ### Графики
 
-<!-- здесь будет скрин из Allure: графики -->
-<!-- <p align="center">
+<p align="center">
 <img src="images/screenshots/allure_graph.jpg" alt="Allure Graphs" width="850"/>
-</p> -->
+</p>
 
 ### Пример API-теста в отчёте
 
-<!-- здесь будет скрин из Allure: request/response -->
-<!-- <p align="center">
+<p align="center">
 <img src="images/screenshots/allure_api_request.jpg" alt="Allure API" width="850"/>
-</p> -->
+</p>
 
 ### Пример UI-теста в отчёте
 
-<!-- здесь будет скрин из Allure: шаги UI-теста или скриншот при падении -->
-<!-- <p align="center">
-<img src="images/screenshots/allure_ui_test.jpg" alt="Allure UI" width="850"/>
-</p> -->
+<p align="center">
+<img src="images/screenshots/allure_ui_test.png" alt="Allure UI" width="850"/>
+</p>
 
 <a id="уведомление-в-telegram"></a>
 
@@ -175,7 +170,6 @@ gradlew.bat allureServe
 
 После прогона тестов в Jenkins в Telegram приходит сообщение с результатом сборки.
 
-<!-- здесь будет скрин уведомления в Telegram -->
-<!-- <p align="center">
-<img src="images/screenshots/telegram_notification.jpg" alt="Telegram" width="850"/>
-</p> -->
+<p align="center">
+<img src="images/screenshots/telegram_notification.png" alt="Telegram" width="850"/>
+</p>
