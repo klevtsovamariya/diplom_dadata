@@ -12,6 +12,7 @@
 - [Запуск тестов из терминала](#запуск-тестов-из-терминала)
 - [Сборка в Jenkins](#сборка-в-jenkins)
 - [Allure Report](#allure-report)
+- [Allure TestOps](#allure-testops)
 - [Уведомление в Telegram](#уведомление-в-telegram)
 
 <a id="стек"></a>
@@ -31,9 +32,7 @@
 
 В проекте автотесты написаны на **Java**. Сборка — **Gradle**, тесты — **JUnit 5**.
 
-Для UI используется **Selenide**, для API — **Rest Assured**. Отчёты формируются в **Allure Report**. Проверки в тестах — через **AssertJ**, тестовые данные генерируются **DataFaker**.
-
-Интеграция с **Allure TestOps** запланирована следующим этапом развития проекта.
+Для UI используется **Selenide**, для API — **Rest Assured**. Отчёты формируются в **Allure Report** и передаются в **Allure TestOps**. Проверки в тестах — через **AssertJ**, тестовые данные генерируются **DataFaker**.
 
 <a id="реализованные-проверки"></a>
 
@@ -119,7 +118,7 @@ dadata.api.secret=...
 
 <a id="allure-report"></a>
 
-## [📊 Пример Allure-отчёта](https://jenkins.autotests.cloud/job/dadata_tests/3/allure/)
+## [📊 Пример Allure-отчёта](https://jenkins.autotests.cloud/job/dadata_tests/4/allure/)
 
 Собрать отчёт:
 
@@ -162,6 +161,27 @@ gradlew.bat allureServe
 <p align="center">
 <img src="images/screenshots/allure_ui_test.png" alt="Allure UI" width="850"/>
 </p>
+
+<a id="allure-testops"></a>
+
+## Allure TestOps
+
+Для интеграции с Allure TestOps используется `allurectl`: после запуска тестов он отправляет результаты из `build/allure-results` в проект TestOps.
+
+В Jenkins нужно добавить переменные окружения:
+
+```
+ALLURE_ENDPOINT=https://allure.autotests.cloud/
+ALLURE_PROJECT_ID=ID_проекта
+ALLURE_TOKEN=токен
+ALLURE_RESULTS=build/allure-results
+```
+
+Команда запуска в Jenkins:
+
+```
+allurectl watch -- gradlew.bat clean test
+```
 
 <a id="уведомление-в-telegram"></a>
 
