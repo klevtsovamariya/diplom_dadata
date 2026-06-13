@@ -166,22 +166,17 @@ gradlew.bat allureServe
 
 ## Allure TestOps
 
-Для интеграции с Allure TestOps используется `allurectl`: после запуска тестов он отправляет результаты из `build/allure-results` в проект TestOps.
+Результаты автотестов передаются из Jenkins в Allure TestOps.
 
-В Jenkins нужно добавить переменные окружения:
+<p align="center">
+<img src="images/screenshots/allure_testops.jpg" alt="Allure TestOps" width="850"/>
+</p>
 
-```
-ALLURE_ENDPOINT=https://allure.autotests.cloud/
-ALLURE_PROJECT_ID=ID_проекта
-ALLURE_TOKEN=токен
-ALLURE_RESULTS=build/allure-results
-```
+### Результаты тестов в Allure TestOps
 
-Команда запуска в Jenkins:
-
-```
-allurectl watch -- gradlew.bat clean test
-```
+<p align="center">
+<img src="images/screenshots/allure_testops_results.jpg" alt="Allure TestOps Results" width="850"/>
+</p>
 
 <a id="уведомление-в-telegram"></a>
 
@@ -190,5 +185,5 @@ allurectl watch -- gradlew.bat clean test
 После прогона тестов в Jenkins в Telegram приходит сообщение с результатом сборки.
 
 <p align="center">
-<img src="images/screenshots/telegram_notification.png" alt="Telegram" width="850"/>
+<img src="images/screenshots/telegram_notification.png" alt="Telegram" width="450"/>
 </p>
