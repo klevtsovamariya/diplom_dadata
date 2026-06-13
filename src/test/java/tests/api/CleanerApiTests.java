@@ -4,6 +4,10 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import models.cleaner.AsIsCleanResponseModel;
+import models.cleaner.AsIsResponseModel;
+import models.cleaner.EmailCleanResponseModel;
+import models.cleaner.EmailResponseModel;
 import models.cleaner.NameCleanResponseModel;
 import models.cleaner.NameRecordResponseModel;
 import models.cleaner.NameResponseModel;
@@ -78,6 +82,48 @@ class CleanerApiTests extends TestBase {
             assertThat(phone.country_code()).isEqualTo("7");
             assertThat(phone.number()).isNotNull();
             assertThat(phone.qc()).isEqualTo(0);
+        });
+    }
+
+    @Test
+    @DisplayName("Email с исправлениями приводится к стандартному виду")
+    @Description("POST /api/v1/clean/EMAIL очищает email, возвращает домен, локальную часть и код качества 4 для исправленного значения.")
+    @Severity(SeverityLevel.NORMAL)
+    void cleanEmailWithCorrectionsShouldBeNormalizedTest() {
+        assumeDadataCredentialsProvided();
+
+        String source = " Test.User@GMAIL.COM ";
+
+        EmailCleanResponseModel response = api.cleaner.cleanEmail(source);
+
+        step("Проверить результат очистки email", () -> {
+            assertThat(response).hasSize(1);
+
+            EmailResponseModel email = response.get(0);
+            assertThat(email.source()).isEqualTo(source);
+            assertThat(email.email()).isEqualTo("test.user@gmail.com");
+            assertThat(email.local()).isEqualTo("test.user");
+            assertThat(email.domain()).isEqualTo("gmail.com");
+            assertThat(email.qc()).isEqualTo(4);
+        });
+    }
+
+    @Test
+    @DisplayName("AS_IS возвращает исходное значение без стандартизации")
+    @Description("POST /api/v1/clean/AS_IS возвращает переданную строку без изменения данных.")
+    @Severity(SeverityLevel.MINOR)
+    void cleanAsIsShouldReturnSourceValueTest() {
+        assumeDadataCredentialsProvided();
+
+        String source = "Тестовое значение 123";
+
+        AsIsCleanResponseModel response = api.cleaner.cleanAsIs(source);
+
+        step("Проверить, что значение вернулось без изменений", () -> {
+            assertThat(response).hasSize(1);
+
+            AsIsResponseModel value = response.get(0);
+            assertThat(value.source()).isEqualTo(source);
         });
     }
 

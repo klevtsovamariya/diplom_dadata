@@ -52,6 +52,9 @@ public class HomePage {
         registrationEmailInput.shouldBe(visible).setValue(email);
         registrationPasswordInput.shouldBe(visible).setValue(password);
 
+        registrationNameInput.shouldHave(value(name));
+        registrationEmailInput.shouldHave(value(email));
+        registrationPasswordInput.shouldHave(value(password));
 
         return this;
     }
@@ -67,6 +70,7 @@ public class HomePage {
     @Step("Ввести email")
     public HomePage setEmail(String email) {
         loginEmailInput.shouldBe(visible).setValue(email);
+        loginEmailInput.shouldHave(value(email));
 
         return this;
     }
@@ -74,6 +78,7 @@ public class HomePage {
     @Step("Ввести пароль")
     public HomePage setPassword(String password) {
         loginPasswordInput.shouldBe(visible).setValue(password);
+        loginPasswordInput.shouldHave(value(password));
 
         return this;
     }
@@ -96,6 +101,13 @@ public class HomePage {
     @Step("Проверить пункты меню в хедере")
     public HomePage checkHeaderMenuItems(String... expectedTexts) {
         headerComponent.verifyHeaderMenuItems(expectedTexts);
+
+        return this;
+    }
+
+    @Step("Открыть раздел «{itemText}» из хедера")
+    public HomePage openHeaderMenuItem(String itemText) {
+        headerComponent.openHeaderMenuItem(itemText);
 
         return this;
     }

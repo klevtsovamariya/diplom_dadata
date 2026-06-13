@@ -21,8 +21,8 @@ import static specs.cleaner.CleanerSpec.unauthorizedCleanResponseSpec;
 
 public class CleanerApiClient {
 
-    private static final String CLEAN_SIMPLE_ENDPOINT = "/api/v1/clean/{type}";
-    private static final String CLEAN_RECORD_ENDPOINT = "/api/v1/clean";
+    private static final String CLEAN_SIMPLE_ENDPOINT = "/clean/{type}";
+    private static final String CLEAN_RECORD_ENDPOINT = "/clean";
     private static final ApiConfig config = create(ApiConfig.class, System.getProperties());
 
     @Step("Отправить ФИО на очистку")

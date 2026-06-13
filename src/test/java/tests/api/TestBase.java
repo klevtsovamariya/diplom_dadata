@@ -16,7 +16,7 @@ public class TestBase {
     @BeforeAll
     public static void setUp() {
         RestAssured.baseURI = config.cleanerBaseUrl();
-        RestAssured.basePath = "";
+        RestAssured.basePath = "/api/v1";
     }
 
     // перед api-тестом проверяю, что ключи заданы — в dadata-secret.properties или через -D

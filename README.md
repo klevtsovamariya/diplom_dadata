@@ -1,9 +1,8 @@
 # Проект по автоматизации тестирования сервиса [DaData](https://dadata.ru/)
 
-<!-- здесь будет баннер проекта -->
-<!-- <p align="center">
-<img src="images/logos/dadata_banner.png" alt="DaData" width="950"/>
-</p> -->
+<p align="center">
+<img src="images/logos/dadata_banner.svg" alt="DaData autotests" width="650"/>
+</p>
 
 # 📝 Содержание:
 
@@ -11,6 +10,7 @@
 - [Реализованные проверки](#реализованные-проверки)
 - [Структура проекта](#структура-проекта)
 - [Запуск тестов из терминала](#запуск-тестов-из-терминала)
+- [Сборка в Jenkins](#сборка-в-jenkins)
 - [Allure Report](#allure-report)
 - [Уведомление в Telegram](#уведомление-в-telegram)
 
@@ -18,11 +18,22 @@
 
 ## ☕ Стек:
 
-![Java](images/logos/Java.png)![Gradle](images/logos/Gradle.png)![Rest-Assured](images/logos/Rest-Assured.png)![Selenide](images/logos/Selenide.png)![Intelij_IDEA](images/logos/Intelij_IDEA.png)![JUnit5](images/logos/JUnit5.png)![Jenkins](images/logos/Jenkins.png)![Selenoid](images/logos/Selenoid.png)![Allure_Report](images/logos/Allure_Report.png)![AllureTestOps](images/logos/AllureTestOps.png)
+[![Java](images/logos/Java.png)](https://www.java.com/)
+[![Gradle](images/logos/Gradle.png)](https://gradle.org/)
+[![Rest-Assured](images/logos/Rest-Assured.png)](https://rest-assured.io/)
+[![Selenide](images/logos/Selenide.png)](https://selenide.org/)
+[![Intelij_IDEA](images/logos/Intelij_IDEA.png)](https://www.jetbrains.com/idea/)
+[![JUnit5](images/logos/JUnit5.png)](https://junit.org/junit5/)
+[![Jenkins](images/logos/Jenkins.png)](https://www.jenkins.io/)
+[![Selenoid](images/logos/Selenoid.png)](https://aerokube.com/selenoid/)
+[![Allure_Report](images/logos/Allure_Report.png)](https://allurereport.org/)
+[![AllureTestOps](images/logos/AllureTestOps.png)](https://qameta.io/)
 
 В проекте автотесты написаны на **Java**. Сборка — **Gradle**, тесты — **JUnit 5**.
 
 Для UI используется **Selenide**, для API — **Rest Assured**. Отчёты формируются в **Allure Report**. Проверки в тестах — через **AssertJ**, тестовые данные генерируются **DataFaker**.
+
+Интеграция с **Allure TestOps** запланирована следующим этапом развития проекта.
 
 <a id="реализованные-проверки"></a>
 
@@ -32,13 +43,15 @@
 
 - главная страница: заголовок и кнопки «Подключиться», «Присоединиться»
 - меню в шапке и иконка у пункта «Поддержка»
+- переключение вкладок подписок в разделе «Цены»
+- поиск статей в разделе «Блог»
 - форма входа по кнопке «Войти»
 - формы регистрации по кнопкам «Подключиться» и «Присоединиться»
 - список продуктов в меню «Продукты»
 
 ### API
 
-- Cleaner: нормализация ФИО и телефона, запись с ФИО, запрос без авторизации
+- Cleaner: нормализация ФИО, телефона и email, AS_IS, запись с ФИО, запрос без авторизации
 - Suggestions: подсказки по адресу и email
 
 Ручные сценарии — в [manual-test-cases.md](src/test/manual-test-cases.md).
@@ -89,11 +102,6 @@ gradlew.bat test --tests "tests.ui.*"
 gradlew.bat test --tests "tests.api.*"
 ```
 
-<!-- здесь будет скрин успешного запуска тестов из терминала -->
-<!-- <p align="center">
-<img src="images/screenshots/terminal_test_run.jpg" alt="Запуск тестов" width="850"/>
-</p> -->
-
 Для API-тестов нужны ключи DaData. Они лежат в файле `dadata-secret.properties` в домашней папке:
 
 ```
@@ -103,9 +111,15 @@ dadata.api.secret=...
 
 Если ключей нет — api-тесты не запускаются.
 
+<a id="сборка-в-jenkins"></a>
+
+## [🔧 Сборка в Jenkins](https://jenkins.autotests.cloud/job/dadata_tests/)
+
+После настройки Jenkins тесты можно запускать удалённо с параметрами браузера, версии браузера, размера окна и адреса Selenoid.
+
 <a id="allure-report"></a>
 
-## 📊 Allure Report
+## [📊 Пример Allure-отчёта](https://jenkins.autotests.cloud/job/dadata_tests/3/allure/)
 
 Собрать отчёт:
 

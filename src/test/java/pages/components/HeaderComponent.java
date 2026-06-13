@@ -27,6 +27,13 @@ public class HeaderComponent {
         return this;
     }
 
+    @Step("Открыть раздел «{itemText}» из хедера")
+    public HeaderComponent openHeaderMenuItem(String itemText) {
+        menuWrapper.$$(byText(itemText)).findBy(visible).click();
+
+        return this;
+    }
+
     @Step("Проверить иконку поддержки")
     public HeaderComponent checkSupportIcon() {
         supportIcon.shouldBe(visible);

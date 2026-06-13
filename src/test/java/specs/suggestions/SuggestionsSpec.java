@@ -20,6 +20,7 @@ public class SuggestionsSpec {
     public static RequestSpecification suggestionsRequestSpec = new RequestSpecBuilder()
             .addRequestSpecification(baseRequestSpec)
             .setBaseUri(config.suggestionsBaseUrl())
+            .setBasePath("")
             .build();
 
     public static ResponseSpecification successfulSuggestResponseSpec = new ResponseSpecBuilder()
