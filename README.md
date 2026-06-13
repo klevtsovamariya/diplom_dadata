@@ -1,4 +1,4 @@
-# Проект по автоматизации тестирования сервиса [DaData](https://dadata.ru/)
+﻿# Проект по автоматизации тестирования сервиса [DaData](https://dadata.ru/)
 
 <p align="center">
 <img src="images/logos/dadata_banner.svg" alt="DaData autotests" width="650"/>
@@ -164,7 +164,7 @@ gradlew.bat allureServe
 
 <a id="allure-testops"></a>
 
-## Allure TestOps
+## [<img alt="Allure TestOps" height="25" src="images/logos/AllureTestOps.png" width="25"/> Allure TestOps](https://allure.autotests.cloud/project/5248/launches)
 
 Результаты автотестов передаются из Jenkins в Allure TestOps.
 
